@@ -1,0 +1,4 @@
+Name: Audio writer
+Description: Write code with your voice.
+Binding: audio_writer
+Interactive: true
