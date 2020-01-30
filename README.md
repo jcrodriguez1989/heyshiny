@@ -46,13 +46,14 @@ library("shiny")
 library("heyshiny")
 
 ui <- fluidPage(
-  useHeyshiny(language = "en-US"),
+  useHeyshiny(language = "en-US"), # configure the heyshiny package
   titlePanel("Hey Shiny!"),
-  speechInput(inputId = "hey_cmd", command = "hey *msg"),
+  speechInput(inputId = "hey_cmd", command = "hey *msg"), # set the input
   verbatimTextOutput("shiny_response")
 )
 
 server <- function(input, output, session) {
+   # read the speech input
   observeEvent(input$hey_cmd, {
     speech <- input$hey_cmd
     message(speech)
