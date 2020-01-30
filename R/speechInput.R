@@ -21,12 +21,16 @@
 #'     \item "hello my :world" will trigger the input$inputId event, with the
 #'           first word said after "hello my".
 #'   }
+#' @param label Display label, or NULL for no label.
 #'
 #' @export
 #'
-speechInput <- function(inputId, command = "hey shiny *message") {
+speechInput <- function(inputId, command = "hey shiny *message", label = NULL) {
   command <- trimws(command)
-  tags$script(generate_input_js(inputId, command))
+  tagList(
+    tags$script(generate_input_js(inputId, command)),
+    h3(label)
+  )
 }
 
 generate_input_js <- function(id, command) {

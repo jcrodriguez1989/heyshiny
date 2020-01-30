@@ -4,7 +4,7 @@
 \alias{speechInput}
 \title{Create a speech recognition input control}
 \usage{
-speechInput(inputId, command = "hey shiny *message")
+speechInput(inputId, command = "hey shiny *message", label = NULL)
 }
 \arguments{
 \item{inputId}{The input slot that will be used to access the value.}
@@ -27,6 +27,8 @@ For example:
   \item "hello my :world" will trigger the input$inputId event, with the
         first word said after "hello my".
 }}
+
+\item{label}{Display label, or NULL for no label.}
 }
 \description{
 Create an input control for entry of speech recognition text values.
