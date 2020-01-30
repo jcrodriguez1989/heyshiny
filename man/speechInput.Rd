@@ -29,5 +29,5 @@ For example:
 }}
 }
 \description{
-Create an input control for entry of speech recognition text values
+Create an input control for entry of speech recognition text values.
 }

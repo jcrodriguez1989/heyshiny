@@ -13,12 +13,25 @@
 #' @export
 #'
 useHeyshiny <- function(language = "en") {
-  elems$initialize()
-  elems$language <- language
   tags$head(
     tags$script(
       src = "//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"
     ),
-    tags$script(src = "heyshiny.js")
+    tags$script(generate_lang_js(language))
+  )
+}
+
+generate_lang_js <- function(language) {
+  paste(
+    "var initHSLang = function() {",
+    "  if (annyang) {",
+    paste0('    annyang.setLanguage("', language, '");'),
+    "  }",
+    "};",
+    "",
+    "$(function() {",
+    "  setTimeout(initHSLang, 1);",
+    "});",
+    sep = "\n"
   )
 }

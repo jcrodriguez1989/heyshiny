@@ -1,6 +1,6 @@
 #' Create a speech recognition input control
 #'
-#' Create an input control for entry of speech recognition text values
+#' Create an input control for entry of speech recognition text values.
 #'
 #' @param inputId	The input slot that will be used to access the value.
 #' @param command The voice command that will activate the speechInput. The
@@ -26,25 +26,47 @@
 #'
 speechInput <- function(inputId, command = "hey shiny *message") {
   command <- trimws(command)
-  elems$inputs <- append(
-    elems$inputs,
-    SpeechInput(
-      id = inputId,
-      command = command,
-      has_variable = grepl("( \\*)|( :)", command)
-    )
-  )
-  generate_js()
-  invisible()
+  tags$script(generate_input_js(inputId, command))
 }
 
-# Class that contains the information related to each speechInput
-#
-SpeechInput <- setRefClass(
-  "SpeechInput",
-  fields = list(
-    id = "character",
-    command = "character",
-    has_variable = "logical"
+generate_input_js <- function(id, command) {
+  paste(
+    paste0("var init", id, " = function() {"),
+    "  if (annyang) {",
+    "    var commands = {",
+    generate_input_command(id, command),
+    "    };",
+    "    annyang.addCommands(commands);",
+    "    annyang.start();",
+    "  }",
+    "};",
+    "",
+    "$(function() {",
+    paste0("  setTimeout(init", id, ", 1);"),
+    "});",
+    sep = "\n"
   )
-)
+}
+
+generate_input_command <- function(id, command) {
+  has_variable <- grepl("( \\*)|( :)", command)
+  paste(
+    paste0(
+      '      "',
+      command,
+      '": function(',
+      (if (has_variable) "msg" else ""),
+      ") {"
+    ),
+    paste0(
+      '        Shiny.setInputValue("',
+      id,
+      '", ',
+      (if (has_variable) "msg" else "Math.random()"),
+      ', {priority: "event"}',
+      ");"
+    ),
+    "      }",
+    sep = "\n"
+  )
+}
