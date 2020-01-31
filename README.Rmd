@@ -37,6 +37,22 @@ annyang, and thus `heyshiny`, depends on that the used browser supports speech r
 
 `heyshiny` works nicely with Google Chrome.
 
+## Frequently Asked Questions
+
+For a FAQ with respect to the Speech Recognition tool, annyang, please refer to its [FAQ page](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md), where you can find:
+
+- [What languages are supported?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#what-languages-are-supported)
+- [Why does the browser repeatedly ask for permission to use the microphone?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#why-does-the-browser-repeatedly-ask-for-permission-to-use-the-microphone)
+- [What can I do to make speech recognition results return faster?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#what-can-i-do-to-make-speech-recognition-results-return-faster)
+- [How can I contribute to annyang's development?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#how-can-i-contribute-to-annyangs-development)
+- [Why does Speech Recognition repeatedly starts and stops?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#why-does-speech-recognition-repeatedly-starts-and-stops)
+- [Can annyang work offline?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#can-annyang-work-offline)
+- [Which browsers are supported?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#which-browsers-are-supported)
+- [Can annyang be used to capture the full text spoken by the user?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#can-annyang-be-used-to-capture-the-full-text-spoken-by-the-user)
+- [Can I detect when the user starts and stops speaking?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#can-i-detect-when-the-user-starts-and-stops-speaking)
+- [Can annyang be used in Chromium or Electron?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#can-annyang-be-used-in-chromium-or-electron)
+- [Can annyang be used in Cordova?](https://github.com/TalAter/annyang/blob/master/docs/FAQ.md#can-annyang-be-used-in-cordova)
+
 ## Example
 
 ```{r eval = FALSE}
