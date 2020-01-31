@@ -32,6 +32,13 @@ generate_lang_js <- function(language) {
     "$(function() {",
     "  setTimeout(initHSLang, 1);",
     "});",
+    "",
+    # function to stop annyang
+    "Shiny.addCustomMessageHandler('stopHS', function(msg) {",
+    "  if (annyang) {",
+    "    annyang.abort();",
+    "  }",
+    "});",
     sep = "\n"
   )
 }
