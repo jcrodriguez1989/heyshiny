@@ -22,6 +22,9 @@ audio_writer <- function(language = "en") {
         inputId = "next_line", "next (line)", "Next line - enter a new line"
       ),
       heyshiny::speechInput(
+        inputId = "delete", "delete :chars", "Delete 'char' - delete chars"
+      ),
+      heyshiny::speechInput(
         inputId = "write", "write *msg", "Write 'code' - write the code"
       ),
       HTML(
@@ -70,15 +73,30 @@ audio_writer <- function(language = "en") {
       sound_finnish(sound())
     })
 
-    # enter code
-    observeEvent(input$write, {
-      rstudioapi::insertText(process_text(input$write))
-      sound_finnish(sound())
-    })
-
     # enter new line
     observeEvent(input$next_line, {
       rstudioapi::insertText("\n")
+      sound_finnish(sound())
+    })
+
+    # celete chars
+    observeEvent(input$delete, {
+      n <- suppressWarnings(as.numeric(input$delete))
+      message(n)
+      if (is.na(n)) {
+        n <- 1
+      }
+      ctx <- getSourceEditorContext()
+      r <- ctx$selection[[1]]$range
+      # todo: keep deleting if n is longer than current line
+      r$start[2] <- r$start[2] - n
+      rstudioapi::modifyRange(r, "")
+      sound_finnish(sound())
+    })
+
+    # enter code
+    observeEvent(input$write, {
+      rstudioapi::insertText(process_text(input$write))
       sound_finnish(sound())
     })
   }
