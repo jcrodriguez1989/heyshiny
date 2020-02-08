@@ -81,15 +81,26 @@ audio_writer <- function(language = "en") {
 
     # celete chars
     observeEvent(input$delete, {
-      n <- suppressWarnings(as.numeric(input$delete))
-      message(n)
-      if (is.na(n)) {
-        n <- 1
+      n_chrs <- suppressWarnings(as.numeric(input$delete))
+      # not recognized or invalid number
+      if (is.na(n_chrs)) {
+        n_chrs <- 1
       }
-      ctx <- getSourceEditorContext()
+      ctx <- rstudioapi::getSourceEditorContext()
       r <- ctx$selection[[1]]$range
-      # todo: keep deleting if n is longer than current line
-      r$start[2] <- r$start[2] - n
+      strt_row <- r$start[[1]]
+      strt_col <- r$start[[2]] - n_chrs
+      remain <- n_chrs - r$start[[2]]
+      while (remain > 0 && strt_row > 1) {
+        strt_row <- strt_row - 1
+        strt_col <- nchar(ctx$contents[[strt_row]]) + 1 - remain
+        remain <- remain - nchar(ctx$contents[[strt_row]]) - 1
+      }
+      if (strt_col <= 0 && strt_row > 1) {
+        strt_row <- strt_row - 1
+        strt_col <- nchar(ctx$contents[[strt_row]]) + 1
+      }
+      r$start <- c(strt_row, strt_col)
       rstudioapi::modifyRange(r, "")
       sound_finnish(sound())
     })
